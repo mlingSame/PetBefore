@@ -1,0 +1,86 @@
+{
+	"easycom": {
+			"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+		},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "主页",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/index/test",
+			"style": {
+				"navigationBarTitleText": "测试",
+				"enablePullDownRefresh": false
+			}
+		}
+		,{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "denglu",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+            "path" : "pages/user/user",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/square/square",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/one/one",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+			"color": "#7A7E83",
+			"selectedColor": "#2c2c2c",
+			"borderStyle": "white",
+			"backgroundColor": "#ffffff",
+			"list": [{
+					"pagePath": "pages/index/index",
+					"iconPath": "static/tabbar/home-1.png",
+					"selectedIconPath": "static/tabbar/home.png",
+					"text": "主页"
+				},
+				{
+					"pagePath": "pages/square/square",
+					"iconPath": "static/tabbar/msg-1.png",
+					"selectedIconPath": "static/tabbar/msg.png",
+					"text": "广场"
+				},
+				{
+					"pagePath": "pages/user/user",
+					"iconPath": "static/tabbar/my-1.png",
+					"selectedIconPath": "static/tabbar/my.png",
+					"text": "我的"
+				}
+			]
+		}
+	}
