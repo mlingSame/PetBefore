@@ -9,22 +9,7 @@
 				"navigationBarTitleText": "主页",
 				"enablePullDownRefresh": false
 			}
-		},
-		{
-			"path": "pages/index/test",
-			"style": {
-				"navigationBarTitleText": "测试",
-				"enablePullDownRefresh": false
-			}
-		}
-		,{
-			"path": "pages/login/login",
-			"style": {
-				"navigationBarTitleText": "denglu",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
+		},{
             "path" : "pages/user/user",
             "style" :                                                                                    
             {
@@ -43,7 +28,7 @@
             
         }
         ,{
-            "path" : "pages/one/one",
+            "path" : "pages/user/login",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
