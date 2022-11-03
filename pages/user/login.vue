@@ -23,15 +23,15 @@
 			return {
 				form: {
 					username: 'manager',
-					password: '123',
+					password: '123',  
 					code: ''
 				},
-				captchaUrl: 'http://192.168.0.103:8080/kaptcha?time=' + new Date(),
+				captchaUrl: 'http://192.168.0.101:8080/kaptcha?time=' + new Date(),
 			}
 		},
 		methods: {
 			updateCaptcha() {
-				this.captchaUrl = 'http://192.168.0.103:8080/kaptcha?time=' + new Date();
+				this.captchaUrl = 'http://192.168.0.101:8080/kaptcha?time=' + new Date();
 			},
 			submit() {
 				this.$H.post('/admin/login', this.form).then(res => {
