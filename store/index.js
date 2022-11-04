@@ -6,17 +6,16 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	state: {
 		hasLogin: uni.getStorageSync("hasLogin"),
-		sessionKey: uni.getStorageSync("sessionKey"),
-		messegeNum:[],
+		userInfo: uni.getStorageSync("userInfo")
 	},
 	mutations: {
 		login(state, userInfo) {			
 			state.hasLogin = uni.getStorageSync("hasLogin");
-			state.sessionKey = uni.getStorageSync("sessionKey");
+			state.userInfo = uni.getStorageSync("userInfo");
 		},
 		logout(state) {
 			state.hasLogin = false;
-			state.sessionKey = null;
+			state.userInfo = null;
 		}
 	}
 })
