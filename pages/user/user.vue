@@ -2,17 +2,31 @@
 	<view class="wrap">
 		<!-- tou -->
 		<view class="header">
-			<u-row gutter="12">
-				<u-col span="4">
-					<u-avatar :src="avatar" class="headImg" mode="square"></u-avatar>
-				</u-col>
-				<u-col span="4">
-					<u-button @click="submitlogin()">登录</u-button>
-				</u-col>
-				<u-col span="4">
-					<u-button @click="regist()">注册</u-button>
-				</u-col>
-			</u-row>
+			<block v-if="hasLogin">
+				<view class="userinfo" >
+					<u-avatar :src="userInfo.avatar"></u-avatar>
+					<view >
+						<text>{{ userInfo.username }}</text>
+						<text class="sub-txt">{{ userInfo.password }}</text>
+					</view>
+					<u-button @click="loginOut()">tuichu登录</u-button>
+				</view>
+			</block>
+			<block v-else>
+				<view >
+					<u-row gutter="12">
+						<u-col span="4">
+							<u-avatar :src="avatar" class="headImg"></u-avatar>
+						</u-col>
+						<u-col span="4">
+							<u-button @click="submitlogin()">登录</u-button>
+						</u-col>
+						<u-col span="4">
+							<u-button @click="regist()">注册</u-button>
+						</u-col>
+					</u-row>
+				</view>
+			</block>
 			<u-subsection :list="list" :current="1"></u-subsection>
 		
 		</view>
@@ -23,6 +37,8 @@
 	export default {
 		data() {
 			return {
+				userInfo:'',
+				hasLogin: false,
 				avatar: '../../static/img/1.png',
 				list: [{
 						name: '待发货'
@@ -35,6 +51,15 @@
 					}
 				],
 				current: 1
+			}
+		},
+		onShow() {
+			if (uni.getStorageSync('hasLogin')) {
+				this.hasLogin = true;
+				this.userInfo=uni.getStorageSync('userInfo');
+				this.hasLogin = true;
+			} else {
+				this.hasLogin = false;
 			}
 		},
 		methods: {
@@ -52,6 +77,15 @@
 					}
 				});
 			},
+			loginOut(){
+				console.log("2232")
+				uni.removeStorageSync("hasLogin");
+				uni.removeStorageSync("token");
+				uni.removeStorageSync("userInfo");
+				uni.switchTab({
+					url: "/pages/index/index"
+				})
+			},
 			regist(){
 				uni.navigateTo({
 					url:'../user/register',
@@ -65,7 +99,9 @@
 						});
 					}
 				});
-			}
+			},
+			
+			
 		}
 	}
 </script>
