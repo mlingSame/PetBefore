@@ -1,5 +1,5 @@
 
-const baseUrl = 'http://192.168.0.101:8080' 
+const baseUrl = 'http://192.168.0.102:8080' 
 export default {
 	request(options = {}) {
 		return new Promise((resolve, reject) => {
@@ -8,6 +8,7 @@ export default {
 				options.url = baseUrl+url;
 			}
 			options.header.token = uni.getStorageSync("token");
+			options.header.Authorization = uni.getStorageSync("token");
 			options.complete = (response) => {
 				if (response.statusCode == 200 || response.statusCode == 0) {
 					if (response.data.code == 401 || response.data.code == 420) {
