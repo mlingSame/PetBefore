@@ -3,17 +3,22 @@
 		<!-- tou -->
 		<view class="header">
 			<block v-if="hasLogin">
-				<view class="userinfo" >
-					<u-avatar :src="userInfo.avatar"></u-avatar>
-					<view >
-						<text>{{ userInfo.username }}</text>
-						<text class="sub-txt">{{ userInfo.password }}</text>
-					</view>
-					<u-button @click="loginOut()">tuichu登录</u-button>
+				<view class="userinfo">
+					<u-row gutter="12">
+						<u-col span="4">
+							<u-avatar :src="avatar" @click="updateFace()"></u-avatar>
+						</u-col>
+						<u-col span="4">
+							<view>{{ userInfo.username }}</view>
+						</u-col>
+						<u-col span="4">
+							<u-button @click="logout()">登出</u-button>
+						</u-col>
+					</u-row>
 				</view>
 			</block>
 			<block v-else>
-				<view >
+				<view>
 					<u-row gutter="12">
 						<u-col span="4">
 							<u-avatar :src="avatar" class="headImg"></u-avatar>
@@ -28,7 +33,7 @@
 				</view>
 			</block>
 			<u-subsection :list="list" :current="1"></u-subsection>
-		
+
 		</view>
 	</view>
 </template>
@@ -37,9 +42,9 @@
 	export default {
 		data() {
 			return {
-				userInfo:'',
+				userInfo: '',
 				hasLogin: false,
-				avatar: '../../static/img/1.png',
+				avatar: '',
 				list: [{
 						name: '待发货'
 					},
@@ -56,29 +61,34 @@
 		onShow() {
 			if (uni.getStorageSync('hasLogin')) {
 				this.hasLogin = true;
-				this.userInfo=uni.getStorageSync('userInfo');
+				this.userBase=uni.getStorageSync("userBase");
 				this.hasLogin = true;
 			} else {
 				this.hasLogin = false;
 			}
 		},
+		mounted() {
+			if (this.hasLogin == true) {
+				this.initUser();
+			}
+
+		},
 		methods: {
 			submitlogin() {
 				uni.navigateTo({
-					url:'../user/login',
+					url: '../user/login',
 					fail: (res) => {
 						console.log(res);
 					},
 					success: (res) => {
 						uni.showToast({
-						title: '请登录',
-						duration: 2000
+							title: '请登录',
+							duration: 2000
 						});
 					}
 				});
 			},
-			loginOut(){
-				console.log("2232")
+			logout() {
 				uni.removeStorageSync("hasLogin");
 				uni.removeStorageSync("token");
 				uni.removeStorageSync("userInfo");
@@ -86,56 +96,46 @@
 					url: "/pages/index/index"
 				})
 			},
-			regist(){
+			regist() {
 				uni.navigateTo({
-					url:'../user/register',
+					url: '../user/register',
 					fail: (res) => {
 						console.log(res);
 					},
 					success: (res) => {
 						uni.showToast({
-						title: '请注册',
-						duration: 2000
+							title: '请注册',
+							duration: 2000
 						});
 					}
 				});
 			},
-			
-			
+			updateFace() {
+				uni.navigateTo({
+					url: '../user/updateFace',
+					fail: (res) => {
+						console.log(res);
+					},
+					success: (res) => {
+						uni.showToast({
+							title: '请上传头像',
+							duration: 2000
+						});
+					}
+				});
+			},
+			initUser(){
+				this.$H.post('/user/selectByUsername',  this.userBase.username).then(res => {
+					uni.setStorageSync("userInfo",res);
+					this.userInfo=res;
+					this.avatar=res.userFace;
+				})
+			}
+
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.header {
-		width: 100%;
-		height: 150rpx;
-		background-color: #F0F8FF;
-	}
 
-	.headImg {
-		width: 150rpx;
-		height: 150rpx;
-	}
-
-	.u-row {
-		margin: 40rpx 0;
-	}
-
-	.demo-layout {
-		height: 80rpx;
-		border-radius: 8rpx;
-	}
-
-	.bg-purple {
-		background: #d3dce6;
-	}
-
-	.bg-purple-light {
-		background: #e5e9f2;
-	}
-
-	.bg-purple-dark {
-		background: #99a9bf;
-	}
 </style>

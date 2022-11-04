@@ -30,6 +30,13 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/user/updateFace",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"globalStyle": {

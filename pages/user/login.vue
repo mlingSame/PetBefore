@@ -39,7 +39,7 @@
 						const token = res.obj.tokenHead + res.obj.token;
 						uni.setStorageSync("hasLogin", true);
 						uni.setStorageSync("token", token);
-						uni.setStorageSync("userInfo",this.form);
+						uni.setStorageSync("userBase",this.form);
 						uni.switchTab({
 							url: '/pages/user/user',
 						});
@@ -54,15 +54,7 @@
 						});
 					}
 				})
-			},
-			hello() {
-					console.log(uni.stora)
-				this.$H.post('/user/hello').then(res=>{
-					
-					console.log("111")
-					console.log(res)
-				})
-				}
+			}
 		}
 	}
 </script>
