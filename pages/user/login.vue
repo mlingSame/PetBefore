@@ -26,20 +26,22 @@
 					password: '123',  
 					code: ''
 				},
-				captchaUrl: 'http://192.168.0.101:8080/kaptcha?time=' + new Date(),
+				captchaUrl: 'http://192.168.0.102:8080/kaptcha?time=' + new Date(),
 			}
 		},
 		methods: {
 			updateCaptcha() {
-				this.captchaUrl = 'http://192.168.0.101:8080/kaptcha?time=' + new Date();
+				this.captchaUrl = 'http://192.168.0.102:8080/kaptcha?time=' + new Date();
 			},
 			submit() {
 				this.$H.post('/admin/login', this.form).then(res => {
 					if (res.code == 200) {
 						const token = res.obj.tokenHead + res.obj.token;
+						uni.setStorageSync("hasLogin", true);
 						uni.setStorageSync("token", token);
+						uni.setStorageSync("userInfo",this.form);
 						uni.switchTab({
-							url: '/pages/index/index',
+							url: '/pages/user/user',
 						});
 						uni.showToast({
 							title: '登录成功',
@@ -52,7 +54,15 @@
 						});
 					}
 				})
-			}
+			},
+			hello() {
+					console.log(uni.stora)
+				this.$H.post('/user/hello').then(res=>{
+					
+					console.log("111")
+					console.log(res)
+				})
+				}
 		}
 	}
 </script>
