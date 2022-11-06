@@ -2,10 +2,10 @@ import App from './App'
 // #ifndef VUE3
 import Vue from 'vue'
 import uView from "uview-ui";
-import request from './utils/api.js';
+import api from './utils/api.js';
 import store from "./store"
 Vue.prototype.$store = store;
-Vue.prototype.$H = request;
+Vue.prototype.$H = api;
 Vue.use(uView);
 Vue.config.productionTip = false
 App.mpType = 'app'

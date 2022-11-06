@@ -9,7 +9,7 @@
 							<u-avatar :src="avatar" @click="updateFace()"></u-avatar>
 						</u-col>
 						<u-col span="4">
-							<view>{{ userInfo.username }}</view>
+							<view>{{ userBase.username }}</view>
 						</u-col>
 						<u-col span="4">
 							<u-button @click="logout()">登出</u-button>
@@ -43,6 +43,7 @@
 		data() {
 			return {
 				userInfo: '',
+				userBase:'',
 				hasLogin: false,
 				avatar: '',
 				list: [{
@@ -63,15 +64,15 @@
 				this.hasLogin = true;
 				this.userBase=uni.getStorageSync("userBase");
 				this.hasLogin = true;
+				
 			} else {
 				this.hasLogin = false;
 			}
 		},
 		mounted() {
-			if (this.hasLogin == true) {
+			if (uni.getStorageSync('hasLogin')) {
 				this.initUser();
 			}
-
 		},
 		methods: {
 			submitlogin() {
@@ -92,6 +93,7 @@
 				uni.removeStorageSync("hasLogin");
 				uni.removeStorageSync("token");
 				uni.removeStorageSync("userInfo");
+				this.avatar='';
 				uni.switchTab({
 					url: "/pages/index/index"
 				})
@@ -125,10 +127,11 @@
 				});
 			},
 			initUser(){
-				this.$H.post('/user/selectByUsername',  this.userBase.username).then(res => {
+				this.$H.post('/user/selectByUsername',this.userBase.username).then(res => {
 					uni.setStorageSync("userInfo",res);
 					this.userInfo=res;
-					this.avatar=res.userFace;
+					let faceAvatar=this.$H.imgUrl+res.userFace;
+					this.avatar=faceAvatar;
 				})
 			}
 

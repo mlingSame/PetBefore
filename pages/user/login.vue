@@ -26,12 +26,12 @@
 					password: '123',  
 					code: ''
 				},
-				captchaUrl: 'http://192.168.0.102:8080/kaptcha?time=' + new Date(),
+				captchaUrl: this.$H.baseUrl+'/kaptcha?time=' + new Date(),
 			}
 		},
 		methods: {
 			updateCaptcha() {
-				this.captchaUrl = 'http://192.168.0.102:8080/kaptcha?time=' + new Date();
+				this.captchaUrl = this.$H.baseUr+'/kaptcha?time=' + new Date();
 			},
 			submit() {
 				this.$H.post('/admin/login', this.form).then(res => {
