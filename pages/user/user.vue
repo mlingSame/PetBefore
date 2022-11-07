@@ -1,6 +1,5 @@
 <template>
 	<view class="wrap">
-		<!-- tou -->
 		<view class="header">
 			<block v-if="hasLogin">
 				<view class="userinfo">
@@ -9,7 +8,7 @@
 							<u-avatar :src="avatar" @click="updateFace()"></u-avatar>
 						</u-col>
 						<u-col span="4">
-							<view>{{ userBase.username }}</view>
+							<view >{{userBase.username}}</view>
 						</u-col>
 						<u-col span="4">
 							<u-button @click="logout()">登出</u-button>
@@ -46,6 +45,7 @@
 				userBase:'',
 				hasLogin: false,
 				avatar: '',
+				avato:'',
 				list: [{
 						name: '待发货'
 					},
@@ -60,18 +60,13 @@
 			}
 		},
 		onShow() {
-			if (uni.getStorageSync('hasLogin')) {
-				this.hasLogin = true;
+			if (uni.getStorageSync('hasLogin')==true) {
+				this.hasLogin=true;
 				this.userBase=uni.getStorageSync("userBase");
-				this.hasLogin = true;
-				
+				this.initUser();
+				this.avatar=this.avato;
 			} else {
 				this.hasLogin = false;
-			}
-		},
-		mounted() {
-			if (uni.getStorageSync('hasLogin')) {
-				this.initUser();
 			}
 		},
 		methods: {
@@ -90,11 +85,12 @@
 				});
 			},
 			logout() {
-				uni.removeStorageSync("hasLogin");
 				uni.removeStorageSync("token");
-				uni.removeStorageSync("userInfo");
+				uni.removeStorageSync("userBase");
+				uni.setStorageSync("hasLogin",false);
+				this.hasLogin=false;
 				this.avatar='';
-				uni.switchTab({
+				uni.reLaunch({
 					url: "/pages/index/index"
 				})
 			},
@@ -130,8 +126,7 @@
 				this.$H.post('/user/selectByUsername',this.userBase.username).then(res => {
 					uni.setStorageSync("userInfo",res);
 					this.userInfo=res;
-					let faceAvatar=this.$H.imgUrl+res.userFace;
-					this.avatar=faceAvatar;
+					this.avato=this.$H.imgUrl+res.userFace;
 				})
 			}
 
