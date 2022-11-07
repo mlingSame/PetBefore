@@ -30,8 +30,9 @@
 			}
 		},
 		methods: {
+			
 			updateCaptcha() {
-				this.captchaUrl = this.$H.baseUr+'/kaptcha?time=' + new Date();
+				this.captchaUrl = this.$H.baseUrl+'/kaptcha?time=' + new Date();
 			},
 			submit() {
 				this.$H.post('/admin/login', this.form).then(res => {
