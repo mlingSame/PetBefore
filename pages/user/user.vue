@@ -87,7 +87,7 @@
 			logout() {
 				uni.removeStorageSync("token");
 				uni.removeStorageSync("userBase");
-				uni.setStorageSync("hasLogin",false);
+				// uni.setStorageSync("hasLogin",false);
 				this.hasLogin=false;
 				this.avatar='';
 				uni.reLaunch({
