@@ -12,28 +12,28 @@
 		}, {
 			"path": "pages/user/user",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "用户信息",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/square/square",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "广场",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/user/login",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "登录",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/user/updateFace",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "更新头像",
 				"enablePullDownRefresh": false
 			}
 
@@ -46,7 +46,15 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/square/addFood",
+            "style": {
+                "navigationBarTitleText": "添加商品",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

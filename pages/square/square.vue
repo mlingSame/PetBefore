@@ -10,7 +10,7 @@
 			@open="open">
 			<view class="u-popup-slot">
 				<u-row gutter="16">
-					<u-col span="5" @click="publish()">
+					<u-col span="5" @click="publishpet()">
 						<view class="demo-layout bg-purple-dark">
 							<uni-icons custom-prefix="iconfont" type="icon-paizhao" size="50"
 							 style="margin-left: 28upx;">发布宠物</uni-icons>
@@ -23,7 +23,7 @@
 							style="margin-left: 30upx;"></uni-icons>
 							<u-button >发布动态</u-button></view>
 					</u-col>
-					<u-col span="7">
+					<u-col span="7" @click="publishFood()">
 						<view class="demo-layout bg-purple-light">
 							<uni-icons custom-prefix="iconfont" type="icon-shangpin" size="50" ></uni-icons>
 							<u-button >发布商品</u-button></view>
@@ -65,8 +65,16 @@
 			close() {
 				this.show = false
 			},
-			publish(){
-				console.log("qewqw")
+			publishFood(){
+				uni.redirectTo({
+					url:'../square/addFood',
+					complete:function(res){
+						console.log(res)
+					}
+				})
+			},
+			publishpet(){
+				console.log("publishpet")
 			}
 		}
 	}
