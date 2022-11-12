@@ -37,17 +37,16 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/index/petInfoAll",
+			"style": {
+				"navigationBarTitleText": "宠物信息",
+				"enablePullDownRefresh": true,
+				"onReachBottom": true
+			}
+
 		}
-	    ,{
-            "path" : "pages/index/petInfoAll",
-        "style" :                                                                                    
-            {
-                "navigationBarTitleText": "宠物信息",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
