@@ -1,0 +1,4 @@
+npm install uview-ui
+npm update uview-ui
+npm i node-sass -D
+npm i sass-loader -D

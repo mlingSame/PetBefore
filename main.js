@@ -5,7 +5,8 @@ import uView from "uview-ui";
 Vue.use(uView);
 import api from './utils/api.js';
 import store from "./store"
-
+import waterfall from 'vue-waterfall2'
+Vue.use(waterfall)
 Vue.prototype.$store = store;
 Vue.prototype.$H = api;
 Vue.config.productionTip = false
