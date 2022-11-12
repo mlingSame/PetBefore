@@ -32,7 +32,45 @@
 				</view>
 			</block>
 			<u-subsection :list="list" :current="1"></u-subsection>
-
+			<view class="u-page__item">
+						<text class="u-page__item__title">个人信息</text>
+						<u-cell-group>
+							<u-cell
+							    title="个人信息"
+							    icon="lock-fill"
+							></u-cell>
+							<u-cell
+							    title="收获地址"
+							    icon="https://cdn.uviewui.com/uview/example/tag.png"
+							></u-cell>
+						</u-cell-group>
+					</view>
+					<view class="u-page__item">
+								<text class="u-page__item__title">app信息</text>
+								<u-cell-group>
+									<u-cell
+									    title="联系客服"
+									    icon="lock-fill"
+									></u-cell>
+									<u-cell
+									    title="提出疑问"
+									    icon="https://cdn.uviewui.com/uview/example/tag.png"
+									></u-cell>
+								</u-cell-group>
+							</view>
+							<view class="u-page__item">
+										<text class="u-page__item__title">个人信息</text>
+										<u-cell-group>
+											<u-cell
+											    title="个人信息"
+											    icon="lock-fill"
+											></u-cell>
+											<u-cell
+											    title="收获地址"
+											    icon="https://cdn.uviewui.com/uview/example/tag.png"
+											></u-cell>
+										</u-cell-group>
+									</view>
 		</view>
 	</view>
 </template>
@@ -135,5 +173,15 @@
 </script>
 
 <style lang="scss" scoped>
-
+	.u-page__item{
+		margin-top: 10upx;
+	}
+	.userinfo{
+		height: 80upx;
+		margin-top: 20upx;
+		margin-bottom: 20upx;
+	}
+	.u-page__item__title{
+		font-size: 30upx;
+	}
 </style>
