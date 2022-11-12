@@ -57,11 +57,11 @@
 			</view>
 			<view  class="card food">
 				<u-line color="#e4e7ed" />
-				<u-text>宠物食品</u-text>
+				<view>宠物食品</view>
 			</view>
 			<view 	class="card hospital">
 				<u-line color="#e4e7ed" />
-				<u-text>宠物医院</u-text>
+				<view>宠物医院</view>
 			</view>
 		</view>
 	</view>
@@ -89,8 +89,6 @@
 		},
 		methods:{
 			petInfoAll(){
-				console.log(this.$u.config.v);
-
 				uni.redirectTo({
 					url:'/pages/index/petInfoAll'
 				})
