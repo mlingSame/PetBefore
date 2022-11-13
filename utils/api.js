@@ -64,6 +64,28 @@ export default {
 		}
 
 		return this.request(options);
+	},
+	put(url, data = {}, header = {}) {
+		let options = {
+			url: url,
+			data: data,
+			header: header,
+			method: "PUT",
+			sslVerify:false,
+		}
+	
+		return this.request(options);
+	},
+	delete(url, data = {}, header = {}) {
+		let options = {
+			url: url,
+			data: data,
+			header: header,
+			method: "DELETE",
+			sslVerify:false,
+		}
+	
+		return this.request(options);
 	}
 	
 };

@@ -8,7 +8,7 @@
 							<u-avatar :src="avatar" @click="updateFace()"></u-avatar>
 						</u-col>
 						<u-col span="4">
-							<view >{{userBase.username}}</view>
+							<view>{{userBase.username}}</view>
 						</u-col>
 						<u-col span="4">
 							<u-button @click="logout()">登出</u-button>
@@ -32,45 +32,103 @@
 				</view>
 			</block>
 			<u-subsection :list="list" :current="1"></u-subsection>
+			<!-- 个人信息 -->
 			<view class="u-page__item">
-						<text class="u-page__item__title">个人信息</text>
-						<u-cell-group>
-							<u-cell
-							    title="个人信息"
-							    icon="lock-fill"
-							></u-cell>
-							<u-cell
-							    title="收获地址"
-							    icon="https://cdn.uviewui.com/uview/example/tag.png"
-							></u-cell>
-						</u-cell-group>
-					</view>
-					<view class="u-page__item">
-								<text class="u-page__item__title">app信息</text>
-								<u-cell-group>
-									<u-cell
-									    title="联系客服"
-									    icon="lock-fill"
-									></u-cell>
-									<u-cell
-									    title="提出疑问"
-									    icon="https://cdn.uviewui.com/uview/example/tag.png"
-									></u-cell>
-								</u-cell-group>
+				<text class="u-page__item__title">个人信息</text>
+				<u-line></u-line>
+				<view class="rowStyle">
+					<u-row justify="space-between" gutter="16">
+						<u-col span="1">
+							<view class="demo-layout ">
+								<uni-icons custom-prefix="iconfont" type="icon-wode" style="margin: 10upx;" size="23">
+								</uni-icons>
 							</view>
-							<view class="u-page__item">
-										<text class="u-page__item__title">个人信息</text>
-										<u-cell-group>
-											<u-cell
-											    title="个人信息"
-											    icon="lock-fill"
-											></u-cell>
-											<u-cell
-											    title="收获地址"
-											    icon="https://cdn.uviewui.com/uview/example/tag.png"
-											></u-cell>
-										</u-cell-group>
-									</view>
+						</u-col>
+						<u-col span="15">
+							<view class="demo-layout">用户信息</view>
+						</u-col>
+					</u-row>
+					<u-line></u-line>
+				</view>
+				<view class="rowStyle">
+					<u-row justify="space-between" gutter="16">
+						<u-col span="1">
+							<view class="demo-layout ">
+								<uni-icons custom-prefix="iconfont" type="icon-shouhuodizhi" style="margin: 10upx;"
+									size="23"></uni-icons>
+							</view>
+						</u-col>
+						<u-col span="15">
+							<view class="demo-layout">收货地址</view>
+						</u-col>
+					</u-row>
+					<u-line></u-line>
+				</view>
+			</view>
+			<view class="u-page__item">
+				<text class="u-page__item__title">app信息</text>
+				<u-line></u-line>
+				<view class="rowStyle">
+					<u-row justify="space-between" gutter="16">
+						<u-col span="1">
+							<view class="demo-layout ">
+								<uni-icons custom-prefix="iconfont" type="icon-kefu" style="margin: 10upx;" size="23">
+								</uni-icons>
+							</view>
+						</u-col>
+						<u-col span="15">
+							<view class="demo-layout">联系客服</view>
+						</u-col>
+					</u-row>
+					<u-line></u-line>
+				</view>
+				<view class="rowStyle">
+					<u-row justify="space-between" gutter="16">
+						<u-col span="1">
+							<view class="demo-layout ">
+								<uni-icons custom-prefix="iconfont" type="icon-fenxiang" style="margin: 10upx;"
+									size="23"></uni-icons>
+							</view>
+						</u-col>
+						<u-col span="15">
+							<view class="demo-layout">用户分享</view>
+						</u-col>
+					</u-row>
+					<u-line></u-line>
+				</view>
+			</view>
+			<view class="u-page__item">
+				<text class="u-page__item__title">个人商城</text>
+				<u-line></u-line>
+				<view class="rowStyle">
+					<u-row justify="space-between" gutter="16">
+						<u-col span="1">
+							<view class="demo-layout ">
+								<uni-icons custom-prefix="iconfont" type="icon-dongwuyuan" style="margin: 10upx;"
+									size="23"></uni-icons>
+							</view>
+						</u-col>
+						<u-col span="15">
+							<view class="demo-layout">个人宠物商城</view>
+						</u-col>
+					</u-row>
+					<u-line></u-line>
+				</view>
+				<view class="rowStyle" @click="foodInfo">
+					<u-row justify="space-between" gutter="16">
+						<u-col span="1">
+							<view class="demo-layout ">
+								<uni-icons custom-prefix="iconfont" type="icon-shangpin" style="margin: 10upx;"
+									size="23"></uni-icons>
+							</view>
+						</u-col>
+						<u-col span="15">
+							<view class="demo-layout">个人食品商城</view>
+						</u-col>
+					</u-row>
+					<u-line></u-line>
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -80,10 +138,10 @@
 		data() {
 			return {
 				userInfo: '',
-				userBase:'',
+				userBase: '',
 				hasLogin: false,
 				avatar: '',
-				avato:'',
+				avato: '',
 				list: [{
 						name: '待发货'
 					},
@@ -98,11 +156,11 @@
 			}
 		},
 		onShow() {
-			if (uni.getStorageSync('hasLogin')==true) {
-				this.hasLogin=true;
-				this.userBase=uni.getStorageSync("userBase");
+			if (uni.getStorageSync('hasLogin') == true) {
+				this.hasLogin = true;
+				this.userBase = uni.getStorageSync("userBase");
 				this.initUser();
-				this.avatar=this.avato;
+				this.avatar = this.avato;
 			} else {
 				this.hasLogin = false;
 			}
@@ -126,8 +184,8 @@
 				uni.removeStorageSync("token");
 				uni.removeStorageSync("userBase");
 				// uni.setStorageSync("hasLogin",false);
-				this.hasLogin=false;
-				this.avatar='';
+				this.hasLogin = false;
+				this.avatar = '';
 				uni.reLaunch({
 					url: "/pages/index/index"
 				})
@@ -160,11 +218,16 @@
 					}
 				});
 			},
-			initUser(){
-				this.$H.post('/user/selectByUsername',this.userBase.username).then(res => {
-					uni.setStorageSync("userInfo",res);
-					this.userInfo=res;
-					this.avato=this.$H.imgUrl+res.userFace;
+			foodInfo() {
+				uni.redirectTo({
+					url: '../user/foodInfo'
+				})
+			},
+			initUser() {
+				this.$H.post('/user/selectByUsername', this.userBase.username).then(res => {
+					uni.setStorageSync("userInfo", res);
+					this.userInfo = res;
+					this.avato = this.$H.imgUrl + res.userFace;
 				})
 			}
 
@@ -173,15 +236,30 @@
 </script>
 
 <style lang="scss" scoped>
-	.u-page__item{
+	.u-page__item {
 		margin-top: 10upx;
 	}
-	.userinfo{
+
+	.userinfo {
 		height: 80upx;
 		margin-top: 20upx;
 		margin-bottom: 20upx;
 	}
-	.u-page__item__title{
+
+	.u-page__item__title {
 		font-size: 30upx;
+	}
+
+	.rowStyle {
+		background-color: #fafafa;
+		margin: 5upx;
+	}
+
+	.demo-layout {
+		height: 35px;
+		border-radius: 4px;
+		justify-content: center;
+		margin-top: 7upx;
+		font-size: 25upx;
 	}
 </style>

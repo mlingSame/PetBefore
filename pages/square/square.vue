@@ -67,10 +67,7 @@
 			},
 			publishFood(){
 				uni.redirectTo({
-					url:'../square/addFood',
-					complete:function(res){
-						console.log(res)
-					}
+					url:'../square/addFood'
 				})
 			},
 			publishpet(){

@@ -24,13 +24,8 @@
 		</u--form>
 		</u--form>
 		<u-button @click="submit()">确定</u-button>
-		<u-button
-							type="error"
-							text="重置"
-							customStyle="margin-top: 10px"
-							@click="reset"
-						></u-button>
-		<u-datetime-picker :show="showcreateTime" :value="createTime" mode="date" closeOnClickOverlay
+		<u-button type="error" text="重置" customStyle="margin-top: 10px" @click="reset"></u-button>
+		<u-datetime-picker :show="showcreateTime" :value="createTime" mode="datetime" closeOnClickOverlay
 			@confirm="createTimeConfirm" @cancel="createTimeClose" @close="createTimeClose"></u-datetime-picker>
 	</view>
 </template>
@@ -45,10 +40,11 @@
 						describfood: '',
 						price: '0.0',
 						validTime: '0',
-						createTime: ''
+						createTime: '',
+						img: ''
 					},
 				},
-				createTime:  Number(new Date()),
+				createTime: Number(new Date()),
 				showcreateTime: false,
 				rules: {
 					'foodInfo.foodname': {
@@ -70,9 +66,14 @@
 						trigger: ['blur', 'change']
 					}
 				},
+				foodUser: {
+					id: '',
+					fid: '',
+					uid: ''
+				},
 				fileList1: [],
 				utl: '',
-				
+
 			};
 		},
 		methods: {
@@ -109,7 +110,7 @@
 			uploadFilePromise(url) {
 				const _this = this;
 				return new Promise((resolve, reject) => {
-					let urlFaceupFile = this.$H.baseUrl + '/user/addFaceImg';
+					let urlFaceupFile = this.$H.baseUrl + '/food/addFoodImg';
 					let a = uni.uploadFile({
 						url: urlFaceupFile,
 						filePath: url,
@@ -137,38 +138,42 @@
 			},
 			createTimeConfirm(e) {
 				this.showcreateTime = false
-				this.model1.foodInfo.createTime = uni.$u.timeFormat(e.value, 'yyyy-mm-dd')
+				this.model1.foodInfo.createTime = uni.$u.timeFormat(e.value, 'yyyy-mm-dd hh:MM:ss')
 				this.$refs.form1.validateField('foodInfo.createTime')
 			},
 			hideKeyboard() {
 				uni.hideKeyboard()
 			},
 			submit() {
-				let url = this.utl;
-				console.log(url)
-				console.log(this.model1.foodInfo)
-				// let id=uni.getStorageSync("foodInfo").uid;
-				// this.$H.get("/user/updateFaceImgByid?id="+id+"&&url="+url).then(res=>{
-				// 	uni.$u.toast("确定更新头像" ) ;
-				// 	uni.switchTab({ 
-				// 		url:'/pages/user/user'
-				// 	})
-				// })
+				this.model1.foodInfo.img = this.utl;
+				this.foodUser.uid = uni.getStorageSync("userInfo").uid;
+				let _this = this;
+				this.$H.put("/food/addFood", this.model1.foodInfo).then(res => {
+					_this.foodUser.fid = res.obj.id
+					this.adduserFood(this.foodUser)
+				})
+			},
+			adduserFood(param) {
+				this.$H.post("/food-user/addFood", param).then(res => {
+					this.$u.toast('添加成功，可在个人主页中查看');
+					uni.switchTab({
+						url: '/pages/user/user'
+					})
+				})
 			},
 			reset() {
-							const validateList = ['foodInfo.foodname', 'foodInfo.describfood', 'foodInfo.price']
-							this.$refs.form1.resetFields()
-							this.$refs.form1.clearValidate()
-							setTimeout(()=>{
-								this.$refs.form1.clearValidate(validateList)
-								// 或者使用 this.$refs.form1.clearValidate()
-							},10)
-						},
+				const validateList = ['foodInfo.foodname', 'foodInfo.describfood', 'foodInfo.price']
+				this.$refs.form1.resetFields()
+				this.$refs.form1.clearValidate()
+				setTimeout(() => {
+					this.$refs.form1.clearValidate(validateList)
+				}, 10)
+			},
 		},
 		onReady() {
 			this.$refs.form1.setRules(this.rules)
 		}
-		
-		
+
+
 	};
 </script>
