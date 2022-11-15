@@ -114,8 +114,9 @@
 				})
 			},
 			allFood(){
+				console.log("233443")
 				uni.navigateTo({
-					url: '/pages/index/foodAll'
+					url: '/pages/index/foodInfoAll'
 				})
 			},
 			selectFood() {

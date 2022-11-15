@@ -76,7 +76,7 @@
             "path" : "pages/index/foodInfoAll",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "全部食品",
                 "enablePullDownRefresh": false
             }
             
