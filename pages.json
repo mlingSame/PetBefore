@@ -58,6 +58,24 @@
             "path" : "pages/user/foodInfo",
             "style" :                                                                                    
             {
+                "navigationBarTitleText": "个人商品",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/square/editFood",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "编辑页面",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/index/foodInfoAll",
+            "style" :                                                                                    
+            {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }

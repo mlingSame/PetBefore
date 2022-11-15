@@ -219,7 +219,7 @@
 				});
 			},
 			foodInfo() {
-				uni.redirectTo({
+				uni.navigateTo({
 					url: '../user/foodInfo'
 				})
 			},

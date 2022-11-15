@@ -6,8 +6,8 @@
 			<u-form-item label="商品" prop="foodInfo.foodname" borderBottom ref="item1">
 				<u--input v-model="model1.foodInfo.foodname" border="none"></u--input>
 			</u-form-item>
-			<u-form-item label="描述信息" prop="foodInfo.deccribFood" borderBottom ref="item1">
-				<u--textarea v-model="model1.foodInfo.deccribFood"></u--textarea>
+			<u-form-item label="描述信息" prop="foodInfo.describfood" borderBottom ref="item1">
+				<u--textarea v-model="model1.foodInfo.describfood"></u--textarea>
 			</u-form-item>
 			<u-form-item label="价格" prop="foodInfo.price" borderBottom ref="item1">
 				<u--input v-model="model1.foodInfo.price">></u--input>
