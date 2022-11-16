@@ -11,7 +11,7 @@
 		<view class="content-class">
 			<view class="card">
 				<u-line color="#e4e7ed" />
-				<view class="Cardtitle">宠物商店<span class="allFood">所有>></span></view>
+				<view class="Cardtitle">宠物商店<span class="allFood" @click="petInfoAll">所有>></span></view>
 				<u-row gutter="16">
 					<u-col span="4">
 						<view class="demo-layout bg-purple">
@@ -57,9 +57,9 @@
 			</view>
 			<view class="card">
 				<view class="Cardtitle">宠物食品<span class="allFood" @click="allFood">所有>></span></view>
-				 <u-row customStyle="margin-bottom: 10px">
+				<u-row customStyle="margin-bottom: 10px">
 					<view v-for="(item,index) in foodInfo" :key="index" style="width: 100%;">
-						 <u-col span="6">
+						<u-col span="6">
 							<view class="demo-layout1 bg-purple-light">
 								<view class="foodname">食品名称：{{item.foodname}}</view>
 								<u-image :src='item.img' width="80px" height="80px"></u-image>
@@ -70,14 +70,20 @@
 								<view><span>价格</span>{{item.price}}<span>￥</span></view>
 								<u-gap></u-gap>
 							</view>
-							 </u-col>
+						</u-col>
 					</view>
-					  
-					</u-row>
+
+				</u-row>
 			</view>
 			<view class="card hospital">
 				<u-line color="#e4e7ed" />
-				<view class="Cardtitle">宠物医院<span class="allFood">所有>></span></view>
+				<view class="Cardtitle">宠物医院<span class="allFood" @click="allHospital">所有>></span></view>
+				<u-collapse>
+					<u-collapse-item :title="item.name" v-for="(item, index) in hospitalInfo" :key="index">
+						{{item.decribHospital}}地址：{{item.province}}-{{item.city}}-{{item.address}} <span>
+							联系方式：</span>{{item.phone}}
+					</u-collapse-item>
+				</u-collapse>
 			</view>
 		</view>
 	</view>
@@ -89,6 +95,7 @@
 		data() {
 			return {
 				foodInfo: [],
+				hospitalInfo: [],
 				listSwiper: [{
 						image: '../../static/img/1.png',
 						title: '蒹葭苍苍，白露为霜。所谓伊人，在水一方'
@@ -106,6 +113,7 @@
 		},
 		onShow() {
 			this.selectFood();
+			this.getListHospital();
 		},
 		methods: {
 			petInfoAll() {
@@ -113,36 +121,49 @@
 					url: '/pages/index/petInfoAll'
 				})
 			},
-			allFood(){
-				console.log("233443")
+			allFood() {
 				uni.navigateTo({
 					url: '/pages/index/foodInfoAll'
+				})
+			},
+			allHospital() {
+				uni.navigateTo({
+					url: '/pages/index/hospitalInfoAll'
 				})
 			},
 			selectFood() {
 				this.$H.get('/food/selectRandomFood').then(res => {
 					this.foodInfo = res;
-					this.foodInfo.forEach((item)=>{
-						item.img=this.$H.imgUrl+item.img
+					this.foodInfo.forEach((item) => {
+						item.img = this.$H.imgUrl + item.img
 					})
-					
+
 				})
-			}
+			},
+			getListHospital() {
+				this.$H.get('/hospital/selectAllHospital?currentPage=' + 1 + '&size=6').then(res => {
+					this.hospitalInfo = res.data;
+				})
+			},
+
 		}
 	}
 </script>
 
 <style>
-	.allFood{
+	.allFood {
 		margin-left: 550upx;
 		color: darkred;
 	}
+
 	.swiper {
 		height: 400upx;
 	}
-	.Cardtitle{
+
+	.Cardtitle {
 		background-color: beige;
 	}
+
 	swiper-item image {
 		width: 100%;
 		height: 400rpx;

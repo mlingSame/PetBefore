@@ -81,6 +81,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/index/hospitalInfoAll",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "所有医院",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
