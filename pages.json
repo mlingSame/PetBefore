@@ -90,6 +90,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/square/commentInfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "博客",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
