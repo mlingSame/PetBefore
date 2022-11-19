@@ -1,6 +1,5 @@
 <template>
 	<view>
-
 		<view>
 			<view style="background-color: azure;width: 100%;height: 70upx;">
 				<u-row customStyle="margin-bottom: 10px">
@@ -21,61 +20,64 @@
 			<u-gap></u-gap>
 		</view>
 		<!-- 评论 -->
-
-		<view v-if="comment!=''">
-			<view v-for="(item,index) in comment" :key="index">
-				<view>{{item.content}}</view>
-				<view>{{item.user.username}}</view>
-				<view>{{item.commentdate}}</view>
-				<view v-if="item.child!=null" v-for="(item1,index1) in item.child" :key="index1">
-					<view>{{item1.content}}</view>
-					<view>{{item1.user.username}}</view>
-					<view>{{item1.commentdate}}</view>
-					<u-line></u-line>
-				</view>
-			</view>
+		<view v-if="onshow">
+			<tree-data :comments="comment"></tree-data>
+			
 		</view>
 	</view>
 </template>
 
 <script>
+	import treeData from "@/components/treeData.vue"
 	export default {
 		data() {
 			return {
-				blog:{
-					user:{
-						userFace:''
+				onshow:false,
+				blog: {
+					user: {
+						userFace: ''
 					}
 				},
-				comment:''
+				blogId: '',
+				comment: [],
 			}
 		},
+
+
 		onLoad(options) {
-			this.getByIdBlog(options.param);
-			this.getComments(options.param);
+			this.blogId = options.param;
+		},
+		mounted() {
+			this.getByIdBlog(this.blogId);
+			this.getComments(this.blogId);
 		},
 		methods: {
-			getByIdBlog(param){
-				this.$H.get('/blog/getByIdBlog?blogId='+param).then(res=>{
-					this.blog=res
+			getByIdBlog(param) {
+				this.$H.get('/blog/getByIdBlog?blogId=' + param).then(res => {
+					this.blog = res
 					this.blog.user.userFace = this.$H.imgUrl + res.user.userFace;
 				})
 			},
-			getComments(param){
-				this.$H.get('/comment/?useTree=true&&blogId='+param).then(res=>{
-					this.comment=res
+			getComments(param) {
+				this.$H.get('/comment/?useTree=true&&blogId=' + param).then(res => {
+					this.comment = res
+					this.onshow=true
 				})
 			}
-		}
+		},
+		components: {
+			treeData: treeData
+		},
 	}
 </script>
 
 <style>
-.imgUsernaem{
+	.imgUsernaem {
 		position: relative;
 	}
+
 	.faceImg {
-		 position: absolute; 
+		position: absolute;
 		top: -25upx;
 		left: 5upx;
 	}
