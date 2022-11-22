@@ -83,6 +83,12 @@
 				this.$H.get('/cata-pet/getListCataPetByPage?categoryName=' + param + '&currentPage=' + this.query
 					.pageindex + '&size=' + this.query.pagesize).then(res => {
 					this.petAndCata = res.data;
+					this.petAndCata.forEach((item) => {
+						let allImg = [];
+						allImg = item.pet[0].img.split(';');
+						item.pet[0].img = this.$H.imgUrl + allImg[0];
+					
+					})
 					this.total = res.total
 
 				})
