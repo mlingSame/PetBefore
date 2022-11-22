@@ -1,12 +1,9 @@
 <template>
 	<view>
 		<view class="header">
-			<u-search class="search" :clearabled="true"></u-search>
-			<swiper class="swiper" indicator-dots="true" autoplay="true" interval="5000" duration="1500">
-				<swiper-item v-for="(item , index) in listSwiper" :key="index">
-					<image :src="item.image" mode="aspectFill"></image>
-				</swiper-item>
-			</swiper>
+			<u-notice-bar :text="text1" class="noticeBar" color="red"></u-notice-bar>
+			<u-swiper :list="listSwiper" keyName="image" showTitle :autoplay="true" circular interval="5000" indicator
+				indicatorMode="line" height="400upx"></u-swiper>
 		</view>
 		<view class="content-class">
 			<view class="card">
@@ -15,19 +12,19 @@
 				<u-row gutter="16">
 					<u-col span="4">
 						<view class="demo-layout bg-purple">
-							<view class="titleCard">猫猫</view>
+							<view class="titleCard" @click="clickpetName('cat')">cat</view>
 							<image class="imgcard" src="../../static/img/card/cat.jpg"></image>
 						</view>
 					</u-col>
 					<u-col span="4">
 						<view class="demo-layout bg-purple-light">
-							<view class="titleCard">狗狗</view>
+							<view class="titleCard" @click="clickpetName('dog')">dog</view>
 							<image class="imgcard" src="../../static/img/card/dog.jpg"></image>
 						</view>
 					</u-col>
 					<u-col span="4">
 						<view class="demo-layout bg-purple">
-							<view class="titleCard">兔兔</view>
+							<view class="titleCard" @click="clickpetName('rabbit')">rabbit</view>
 							<image class="imgcard" src="../../static/img/card/tu.jpg"></image>
 						</view>
 					</u-col>
@@ -35,22 +32,20 @@
 				<u-row gutter="16">
 					<u-col span="4">
 						<view class="demo-layout bg-purple">
-							<view class="titleCard">鼠鼠</view>
+							<view class="titleCard" @click="clickpetName('rat')">rat</view>
 							<image class="imgcard" src="../../static/img/card/rat.jpg"></image>
 						</view>
 					</u-col>
 					<u-col span="4">
 						<view class="demo-layout bg-purple-light">
-							<view class="titleCard">鸡鸡</view>
+							<view class="titleCard" @click="clickpetName('chick')">chick</view>
 							<image class="imgcard" src="../../static/img/card/ji.jpg"></image>
 						</view>
 					</u-col>
 					<u-col span="4">
-						<view class="demo-layout bg-purple">
-							<view class="titleCard">
-								<u-button @click="petInfoAll">其他</u-button>
-							</view>
-							<image class="imgcard" src="../../static/img/card/ji.jpg"></image>
+						<view class="demo-layout bg-purple" @click="petInfoAll">
+							<view class="titleCard" >petAll</view>
+							<image class="imgcard" src="../../static/img/card/pet.jpg"></image>
 						</view>
 					</u-col>
 				</u-row>
@@ -58,16 +53,18 @@
 			<view class="card">
 				<view class="Cardtitle">宠物食品<span class="allFood" @click="allFood">所有>></span></view>
 				<u-row customStyle="margin-bottom: 10px">
-					<view v-for="(item,index) in foodInfo" :key="index" style="width: 100%;">
+					<view v-for="(item,index) in foodInfo" :key="index" style="width: 100%;" class="foodACss">
 						<u-col span="6">
-							<view class="demo-layout1 bg-purple-light">
-								<view class="foodname">食品名称：{{item.foodname}}</view>
-								<u-image :src='item.img' width="80px" height="80px"></u-image>
+							<view class="demo-layout1 bg-purple-light" @click="redictFood(item)">
+								<view class="titleCard">{{item.foodname}}</view>
+								<image :src='item.img'  class="foodImgcard" width="80px" height="80px"></image>
+								
+								<view><span>描述信息:</span><view class="describfood">{{item.describfood}}</view></view>
+								<view><span class="foodspan">￥{{item.price}}</span></view>
 								<view>
-									<span>生产日期</span>{{item.createTime}}<span>有效期</span>{{item.validTime}}<span>月</span>
+									<span >生产日期{{item.createTime}}</span>
 								</view>
-								<view><span>描述信息</span>{{item.describfood}}</view>
-								<view><span>价格</span>{{item.price}}<span>￥</span></view>
+								
 								<u-gap></u-gap>
 							</view>
 						</u-col>
@@ -94,19 +91,20 @@
 		name: "petStore",
 		data() {
 			return {
+				text1: 'WELCOME TO THE PET COMMUNITY,IF YOU HAVE ANY QUESTIONS ,PLEASE CONTACT US ',
 				foodInfo: [],
 				hospitalInfo: [],
 				listSwiper: [{
 						image: '../../static/img/1.png',
-						title: '蒹葭苍苍，白露为霜。所谓伊人，在水一方'
+						title: 'In the pet shop, you can buy pets'
 					},
 					{
-						image: '../../static/img/2.png',
-						title: '溯洄从之，道阻且长。溯游从之，宛在水中央'
+						image: '../../static/img/food.png',
+						title: 'At the food store, you can buy food for your pet'
 					},
 					{
-						image: '../../static/img/3.png',
-						title: '蒹葭萋萋，白露未晞。所谓伊人，在水之湄'
+						image: '../../static/img/hospital.png',
+						title: 'In the pet hospital shop, you can see a doctor for your pet'
 					}
 				]
 			};
@@ -126,6 +124,11 @@
 					url: '/pages/index/foodInfoAll'
 				})
 			},
+			clickpetName(item) {
+				uni.navigateTo({
+					url: '/pages/index/petInfoAll?param=' + item
+				})
+			},
 			allHospital() {
 				uni.navigateTo({
 					url: '/pages/index/hospitalInfoAll'
@@ -140,6 +143,12 @@
 
 				})
 			},
+			redictFood(param){
+				// console.log(param)
+				uni.navigateTo({
+					url: '/pages/index/foodInfoAll'
+				})
+			},
 			getListHospital() {
 				this.$H.get('/hospital/selectAllHospital?currentPage=' + 1 + '&size=6').then(res => {
 					this.hospitalInfo = res.data;
@@ -151,14 +160,16 @@
 </script>
 
 <style>
+	.noticeBar {
+		margin-top: 5upx;
+		margin-bottom: 5upx;
+	}
+
 	.allFood {
 		margin-left: 550upx;
 		color: darkred;
 	}
 
-	.swiper {
-		height: 400upx;
-	}
 
 	.Cardtitle {
 		background-color: beige;
@@ -169,8 +180,14 @@
 		height: 400rpx;
 	}
 
-	.search {
-		margin-bottom: 50rpx;
+	.describfood{
+		width: 100%;
+		height: 70upx;
+		font-size: 18upx;
+		background-color: #c8c4a7;
+		margin-top: 5upx;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.content-class {
@@ -192,9 +209,9 @@
 
 	.demo-layout1 {
 		width: 290rpx;
-		height: 400rpx;
+		height: 450rpx;
 		border-radius: 5%;
-		margin-right: 15upx;
+		margin-left: 25upx;
 	}
 
 	.demo-layout {
@@ -222,9 +239,25 @@
 		margin-left: 30upx;
 		border-radius: 50%;
 	}
-
-	.titleCard {
-		font-size: 40upx;
+	.foodImgcard{
+		width: 120upx;
+		height: 180upx;
+		margin-left: 73upx;
+		border-radius: 5%;
+	}
+	.foodACss{
+		font-size: 20upx;
+	}
+	.foodspan{
+		display: block;
+		margin-left: 60upx;
 		color: red;
+		font-size: 30upx;
+	}
+	.titleCard {
+		font-size: 50upx;
+		color: #c8c4a7;
+		text-align: center;
+		font-weight: bold;	
 	}
 </style>
