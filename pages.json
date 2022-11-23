@@ -45,56 +45,61 @@
 				"onReachBottom": true
 			}
 
+		}, {
+			"path": "pages/square/addFood",
+			"style": {
+				"navigationBarTitleText": "添加商品",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/foodInfo",
+			"style": {
+				"navigationBarTitleText": "个人商品",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/square/editFood",
+			"style": {
+				"navigationBarTitleText": "编辑页面",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/index/foodInfoAll",
+			"style": {
+				"navigationBarTitleText": "全部食品",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/index/hospitalInfoAll",
+			"style": {
+				"navigationBarTitleText": "所有医院",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/square/commentInfo",
+			"style": {
+				"navigationBarTitleText": "博客",
+				"enablePullDownRefresh": true
+			}
+
+		}, {
+			"path": "pages/square/addPet",
+			"style": {
+				"navigationBarTitleText": "添加宠物",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	    ,{
-            "path" : "pages/square/addFood",
-            "style": {
-                "navigationBarTitleText": "添加商品",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/user/foodInfo",
+            "path" : "pages/user/petInfo",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "个人商品",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/square/editFood",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "编辑页面",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/foodInfoAll",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "全部食品",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/index/hospitalInfoAll",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "所有医院",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/square/commentInfo",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "博客",
+                "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
             

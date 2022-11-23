@@ -108,7 +108,7 @@
 						duration: 2000
 					});
 					_this.CommentShow = false
-					_this.getComments(this.blogId);
+					this.getComments(this.blogId);
 				})
 			},
 			open() {

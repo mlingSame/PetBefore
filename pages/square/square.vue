@@ -11,8 +11,8 @@
 			@open="open">
 			<view class="u-popup-slot">
 				<u-row gutter="12">
-					<u-col span="4" @click="publishpet()">
-						<view class="demo-layout">
+					<u-col span="4" >
+						<view class="demo-layout" @click="publishpet()">
 							<view class="iconView">
 								<uni-icons custom-prefix="iconfont" type="icon-paizhao" size="50">发布宠物</uni-icons>
 							</view>
@@ -20,7 +20,7 @@
 						</view>
 					</u-col>
 					<u-col span="4">
-						<view class="demo-layout ">
+						<view class="demo-layout " @click="publishAcTive">
 							<view lass="iconView">
 								<uni-icons custom-prefix="iconfont" type="icon-bianji" size="50"></uni-icons>
 							</view>
@@ -112,7 +112,7 @@
 				uni.navigateBack()
 			},
 			open() {
-				console.log('open');
+				// console.log('open');
 			},
 			close() {
 				this.show = false
@@ -129,12 +129,17 @@
 				this.keyword = ''
 			},
 			publishFood() {
-				uni.redirectTo({
+				uni.navigateTo({
 					url: '../square/addFood'
 				})
 			},
 			publishpet() {
-				console.log("publishpet")
+				uni.navigateTo({
+					url: '../square/addPet'
+				})
+			},
+			publishAcTive(){
+				
 			}
 		}
 	}
