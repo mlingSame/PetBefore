@@ -2,3 +2,13 @@ npm install uview-ui
 npm update uview-ui
 npm i node-sass -D
 npm i sass-loader -D
+除了以上这些，如果还需要安装则按照提示安装就行
+
+需要修改的地方
+1.utils/api.js 中：这里改为 192.168.0.102改为本机或者服务器地址 
+2.img/pet 改为与后端 package com.example.petweb.utils.UploadUtils中的BASE_PATH 和BASE_URL
+const baseUrl = 'http://192.168.0.102:8080' 
+const imgUrl='http://192.168.0.102:8080/img/pet/'
+
+3.如果是模拟器需要配置端口在 manifest.json中  本项目是夜神模拟器
+在上方窗口运行中可以配置adb（模拟器安装路径下）和端口配置
