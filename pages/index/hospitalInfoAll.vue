@@ -1,11 +1,11 @@
 <template>
 	<view>
-		<u-search :clearabled="true" style="margin:8px" border-color="red"></u-search>
+		<u-search :clearabled="true" style="margin:8px" border-color="red" v-model="keyword" focus @search='getListHospital' @custom='getListHospital' @clear="clear"></u-search>
 		<!-- 右侧 -->
 		<view class="content">
 			<view v-for="(item,index) in hospitalInfo" :key="index" class="cardHospital">
 				<u-line></u-line>
-				<view class="hospitalname"><span>医院名字</span>{{item.name}}</view>
+				<view class="hospitalname"><span></span>{{item.name}}</view>
 				<u-line></u-line>
 				<view class="decribHospital">{{item.decribHospital}}</view>
 				<view class="majorName"><span>所属人：</span> {{item.majorName}}<span> 联系方式：</span>{{item.phone}}</view>
@@ -29,6 +29,7 @@
 					pageindex: 1,
 				},
 				total: '',
+				keyword:'pet',
 				hospitalInfo: [],
 				status: 'loadmore',
 			}
@@ -57,6 +58,9 @@
 				this.query.pageindex = 1;
 				this.getListHospital();
 			},
+			clear(value){
+				this.keyword=''
+			},
 			getListHospital(param) {
 				if (param == '' || param == undefined) {
 					this.$H.get('/hospital/selectAllHospital?currentPage=' + this.query
@@ -66,11 +70,9 @@
 
 					})
 				} else {
-					this.$H.get('hospital/selectAllHospital?name=' + param + '&currentPage=' + this.query
-						.pageindex + '&size=' + this.query.pagesize).then(res => {
+					this.$H.get('/hospital/selectAllHospital?decribHospital=' + param + '&currentPage=' + this.query.pageindex + '&size=' + this.query.pagesize).then(res => {
 						this.hospitalInfo = res.data;
 						this.total = res.total
-
 					})
 				}
 
@@ -91,7 +93,7 @@
 	.hospitalname {
 		text-align: center;
 		color: darkred;
-
+		font-size: 30px;
 	}
 
 	.content {
