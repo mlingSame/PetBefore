@@ -105,7 +105,7 @@
             
         }
         ,{
-            "path" : "pages/square/addComment",
+            "path" : "pages/square/addBlog",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "发布动态",

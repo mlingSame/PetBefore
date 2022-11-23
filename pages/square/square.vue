@@ -140,7 +140,7 @@
 			},
 			publishAcTive(){
 				uni.navigateTo({
-					url:'../square/addComment'
+					url:'../square/addBlog'
 				})
 			}
 		}
