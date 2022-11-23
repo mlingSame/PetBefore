@@ -190,11 +190,12 @@
 			logout() {
 				uni.removeStorageSync("token");
 				uni.removeStorageSync("userBase");
-				// uni.setStorageSync("hasLogin",false);
+				uni.removeStorageSync("userInfo");
+				uni.removeStorageSync("hasLogin");
 				this.hasLogin = false;
 				this.avatar = '';
 				uni.reLaunch({
-					url: "/pages/index/index"
+					url: "/pages/user/login"
 				})
 			},
 			regist() {
