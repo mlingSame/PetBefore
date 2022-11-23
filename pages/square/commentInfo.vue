@@ -3,26 +3,37 @@
 		<view>
 			<view style="background-color: azure;width: 100%;height: 70upx;">
 				<u-row customStyle="margin-bottom: 10px">
-					<u-col span="6" class="imgUsernaem">
+					<u-col span="5" class="imgUsernaem">
 						<u-image :src="blog.user.userFace" width="70upx" height="70upx" shape="circle" radius="50%"
 							class="faceImg">
 						</u-image>
 						<span class="facename">{{blog.user.username}}:</span>
 					</u-col>
-					<u-col span="6">
-						<span>{{blog.title}}</span>
+					<u-col span="7">
+						<span style="margin-top: 10upx;color: firebrick;font-size: 30upx;">{{blog.title}}</span>
 					</u-col>
 				</u-row>
 			</view>
-			<view style="width: 100%;height: 300upx;background-color: aqua;">
-				{{blog.content}}{{blog.createdate}}
+			<view class="contenDes">
+				{{blog.content}}
 			</view>
-			<u-gap></u-gap>
+			<view style="text-align: right;margin-left: 5upx;">{{blog.createdate}}</view>
 		</view>
+		<u-button @click="publishCommentByid(blog.blogId)">发表评论</u-button>
+		<u-popup  :safeAreaInsetTop="true" :mode="popupData.mode" :show="CommentShow"
+			:round="popupData.round" :overlay="popupData.overlay" :borderRadius="popupData.borderRadius"
+			:closeable="popupData.closeable" :closeOnClickOverlay="popupData.closeOnClickOverlay" @close="close"
+			@open="open">
+			<h4>请评论:</h4>
+			<view style="background-color: #f5f5dc;">
+				<u-input v-model="commentRely" :type="type" border=true border-color="red"  :height="height"
+					:auto-height="autoHeight" />
+			</view>
+			<u-button @click="RelyCommentByid(blog.blogId)">评论</u-button>
+		</u-popup>
 		<!-- 评论 -->
 		<view v-if="onshow">
 			<tree-data :comments="comment"></tree-data>
-			
 		</view>
 	</view>
 </template>
@@ -32,14 +43,32 @@
 	export default {
 		data() {
 			return {
-				onshow:false,
+				onshow: false,
+				CommentShow: false,
 				blog: {
 					user: {
 						userFace: ''
 					}
 				},
+				type: 'text',
+				height: 200,
+				autoHeight: true,
 				blogId: '',
 				comment: [],
+				commentRely: '',
+				popupData: {
+					overlay: true,
+					mode: 'top',
+					borderRadius: '',
+					closeable: true,
+					round: 10,
+					closeOnClickOverlay: true
+				},
+				commentInfo:{
+					blogId:'',
+					content:'',
+					userId:''
+				}
 			}
 		},
 
@@ -61,9 +90,33 @@
 			getComments(param) {
 				this.$H.get('/comment/?useTree=true&&blogId=' + param).then(res => {
 					this.comment = res
-					this.onshow=true
+					this.onshow = true
 				})
-			}
+			},
+			publishCommentByid(param) {
+				this.CommentShow = true;
+			},
+			RelyCommentByid(param) {
+				let _this=this;
+				this.commentInfo.blogId=param;
+				this.commentInfo.content=this.commentRely;
+				this.commentInfo.userId=uni.getStorageSync("userInfo").uid;
+				let comment=this.commentInfo;
+				this.$H.post("/comment/addComment",comment).then(res=>{
+					uni.showToast({
+						title: '评论成功',
+						duration: 2000
+					});
+					_this.CommentShow = false
+					_this.getComments(this.blogId);
+				})
+			},
+			open() {
+				// console.log('open');
+			},
+			close() {
+				this.CommentShow = false
+			},
 		},
 		components: {
 			treeData: treeData
@@ -87,6 +140,16 @@
 		left: 80upx;
 		font-size: 20upx;
 		margin-bottom: 100upx;
-		color: #aa0000;
+	}
+
+	.contenDes {
+		text-indent: 50px;
+		background-color: #f5f5dc;
+		height: 250upx;
+		text-align: justify;
+		letter-spacing: 1spx;
+		tab-size: 20upx;
+		margin: 5upx;
+		width: 100%;
 	}
 </style>
