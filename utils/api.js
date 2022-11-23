@@ -10,7 +10,6 @@ export default {
 			if (url.indexOf("http://") == -1 && url.indexOf("https://") == -1) {
 				options.url = baseUrl+url;
 			}
-			console.log(options.url)
 			options.header['Authorization'] = uni.getStorageSync("token");
 			options.complete = (response) => {
 				if (response.statusCode == 200 || response.statusCode == 0) {
