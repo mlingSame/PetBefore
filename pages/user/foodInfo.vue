@@ -12,9 +12,11 @@
 						</li>
 				</view>
 				</ul>
-					<view><span>生产日期</span>{{item.food.createTime}}<span>有效期</span>{{item.food.validTime}}<span>月</span></view>
-					<view><span>描述信息</span>{{item.food.describfood}}</view>
-					<view><span>价格</span>{{item.food.price}}<span>￥</span></view>
+					<view><span style="margin: 5upx;">描述信息:</span>
+						<view class="describfood">{{item.food.describfood}}</view>
+					</view>
+					<view style="text-align: center; color: darkred;"><span>价格</span>{{item.food.price}}<span>￥</span></view>
+					<view style="font-size: 20upx;text-align: right;"><span>生产日期:</span>{{item.food.createTime}}<span>有效期:</span>{{item.food.validTime}}<span>月</span></view>
 					<u-button @click="editFood(item)">修改详细信息</u-button>
 					<u-gap></u-gap>
 			</view>
@@ -84,5 +86,14 @@
 		text-align: center;
 		font-size: 40upx;
 		color: darkred;
+	}
+	.describfood{
+		text-indent: 50px;
+		background-color: #f5f5dc;
+		height: 150upx;
+		text-align: justify;
+		letter-spacing: 1spx;
+		tab-size: 20upx;
+		margin: 5upx;
 	}
 </style>

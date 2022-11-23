@@ -100,7 +100,7 @@
 			<view class="u-page__item">
 				<text class="u-page__item__title">个人商城</text>
 				<u-line></u-line>
-				<view class="rowStyle">
+				<view class="rowStyle" @click="petInfo">
 					<u-row justify="space-between" gutter="16">
 						<u-col span="1">
 							<view class="demo-layout ">
@@ -221,6 +221,11 @@
 			foodInfo() {
 				uni.navigateTo({
 					url: '../user/foodInfo'
+				})
+			},
+			petInfo(){
+				uni.navigateTo({
+					url: '../user/petInfo'
 				})
 			},
 			initUser() {
