@@ -20,9 +20,9 @@
 						</view>
 					</u-col>
 					<u-col span="4">
-						<view class="demo-layout " @click="publishAcTive">
+						<view class="demo-layout " @click="publishAcTive()">
 							<view lass="iconView">
-								<uni-icons custom-prefix="iconfont" type="icon-bianji" size="50"></uni-icons>
+								<view style="margin-left: 75upx;"><uni-icons custom-prefix="iconfont" type="icon-bianji" size="50"></uni-icons></view>
 							</view>
 							<view class="publishCss">发布动态</view>
 						</view>
@@ -139,7 +139,9 @@
 				})
 			},
 			publishAcTive(){
-				
+				uni.navigateTo({
+					url:'../square/addComment'
+				})
 			}
 		}
 	}

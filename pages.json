@@ -104,6 +104,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/square/addComment",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发布动态",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
