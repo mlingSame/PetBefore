@@ -36,7 +36,7 @@
 			<view class="u-page__item">
 				<text class="u-page__item__title">个人信息</text>
 				<u-line></u-line>
-				<view class="rowStyle">
+				<view class="rowStyle" @click="returnUserInfo">
 					<u-row justify="space-between" gutter="16">
 						<u-col span="1">
 							<view class="demo-layout ">
@@ -59,7 +59,12 @@
 							</view>
 						</u-col>
 						<u-col span="15">
-							<view class="demo-layout">收货地址</view>
+
+							<u-collapse>
+								<u-collapse-item title="收货地址" :open="open" :disabled="disabled">
+									{{userInfo.addr}}
+								</u-collapse-item>
+							</u-collapse>
 						</u-col>
 					</u-row>
 					<u-line></u-line>
@@ -142,6 +147,8 @@
 				hasLogin: false,
 				avatar: '',
 				avato: '',
+				open: false,
+				disabled: false,
 				list: [{
 						name: '待发货'
 					},
@@ -223,9 +230,14 @@
 					url: '../user/foodInfo'
 				})
 			},
-			petInfo(){
+			petInfo() {
 				uni.navigateTo({
 					url: '../user/petInfo'
+				})
+			},
+			returnUserInfo() {
+				uni.navigateTo({
+					url: './userInfo'
 				})
 			},
 			initUser() {
